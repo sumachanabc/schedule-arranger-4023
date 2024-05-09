@@ -24,6 +24,7 @@ function parseCandidateNames(candidatesStr) {
     .map((s) => s.trim())
     .filter((s) => s !== "");
 }
+
 app.get("/new", ensureAuthenticated(), (c) => {
   return c.html(
     layout(
@@ -207,7 +208,7 @@ app.get("/:scheduleId", ensureAuthenticated(), async (c) => {
                             >
                               ${label}
                             </button>`
-                            : html`<h3>${label}</h3>`}
+                          : html`<h3>${label}</h3>`}
                       </td>
                     `;
                   })}
