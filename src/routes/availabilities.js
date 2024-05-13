@@ -6,7 +6,7 @@ const prisma = new PrismaClient({ log: ["query"] });
 const app = new Hono();
 
 app.post(
-  "/:scheduleId/users/:userId/candidates/:candidateId", 
+  "/:scheduleId/users/:userId/candidates/:candidateId",
   ensureAuthenticated(),
   async (c) => {
     const scheduleId = c.req.param("scheduleId");
@@ -22,6 +22,7 @@ app.post(
       candidateId,
       availability,
     };
+
     await prisma.availability.upsert({
       where: {
         availabilityCompositeId: {
