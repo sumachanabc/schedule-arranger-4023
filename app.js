@@ -11,8 +11,8 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient({ log: [ 'query' ] });
 
 const GitHubStrategy = require('passport-github2').Strategy;
-const GITHUB_CLIENT_ID = '2f831cb3d4aac02393aa';
-const GITHUB_CLIENT_SECRET = '9fbc340ac0175123695d2dedfbdf5a78df3b8067';
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID || 'Ov23liTH8kV3mYcCyEPG';
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET || '89c62175c2a4be49823d033932a302e5669dfc9a';
 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((obj, done) => done(null, obj));
@@ -20,7 +20,7 @@ passport.deserializeUser((obj, done) => done(null, obj));
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:8000/auth/github/callback'
+    callbackURL: process.env.CALLBACK_URL || 'https://sumachanabc-schedule-arranger-4023.onrender.com/auth/github/callback'
   },
   (accessToken, refreshToken, profile, done) => {
     process.nextTick(async () => {
